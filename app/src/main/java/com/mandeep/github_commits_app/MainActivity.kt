@@ -4,23 +4,31 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
+import androidx.activity.viewModels
+import androidx.lifecycle.Observer
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.mandeep.github_commits_app.MVVM.DataObjects.Commit
 import com.mandeep.github_commits_app.MVVM.DataObjects.CommitX
 import com.mandeep.github_commits_app.MVVM.GitService
 import com.mandeep.github_commits_app.MVVM.MyAdapetr
+import com.mandeep.github_commits_app.MVVM.MyViewModel
 import com.mandeep.github_commits_app.databinding.ActivityMainBinding
+import dagger.hilt.android.AndroidEntryPoint
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     lateinit var binding:ActivityMainBinding
-    val API = "https://api.github.com/"
+   // val API = "https://api.github.com/"
+
+      // val myViewModel :MyViewModel by viewModels()
 
     val mContext = this
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,25 +37,10 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
 
-            val retrofit = Retrofit.Builder().baseUrl(API).addConverterFactory(GsonConverterFactory.create()).build()
-               val service = retrofit.create(GitService::class.java)
+          /*  val retrofit = Retrofit.Builder().baseUrl(API).addConverterFactory(GsonConverterFactory.create()).build()
+               val service = retrofit.create(GitService::class.java)*/
 
-       /*service.getCommits().enqueue(object:Callback<List<CommitX>>{
-           override fun onResponse(call: Call<List<CommitX>>, response: Response<List<CommitX>>) {
-               Log.d("efignef",response.body()?.size.toString())
-               response.body()?.forEach {
-                //   Log.d("eigfne",it.message+"  ")
-                   Log.d("eigfne",it.message)
-
-               }
-           }
-
-           override fun onFailure(call: Call<List<CommitX>>, t: Throwable) {
-               Log.d("efignef",t.toString())
-
-           }
-       })*/
-        service.getCommits().enqueue(object:Callback<Commit>{
+     /*   service.getCommits().enqueue(object:Callback<Commit>{
             override fun onResponse(call: Call<Commit>, response: Response<Commit>) {
                 Log.d("-3rk3r3",response.body()?.size.toString())
                 val commit = response.body()
@@ -64,7 +57,8 @@ class MainActivity : AppCompatActivity() {
             override fun onFailure(call: Call<Commit>, t: Throwable) {
                 Log.d("-3rk3r3",t.toString())
             }
-        })
+        })*/
+
 
 
     }
