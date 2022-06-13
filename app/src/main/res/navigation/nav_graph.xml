@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/screen1">
+
+    <fragment
+        android:id="@+id/screen1"
+        android:name="com.mandeep.github_commits_app.ScreensFragment.screen1"
+        android:label="screen1" >
+        <action
+            android:id="@+id/action_screen1_to_screen2"
+            app:destination="@id/screen2" />
+    </fragment>
+    <fragment
+        android:id="@+id/screen2"
+        android:name="com.mandeep.github_commits_app.ScreensFragment.Screen2"
+        android:label="fragment_screen2"
+        tools:layout="@layout/fragment_screen2" />
+</navigation>
