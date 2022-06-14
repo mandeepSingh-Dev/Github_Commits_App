@@ -3,6 +3,7 @@ package com.mandeep.github_commits_app.MVVM
 import android.app.Activity
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -29,6 +30,7 @@ class MyAdapetr(val context: Context, val commit:Commit,val activity:Activity):R
 
         val singleCommit = commit.get(position)
 
+
         val author = singleCommit.commit.author.name
         val date = singleCommit.commit.author.date
         val sha =singleCommit.commit.tree.sha
@@ -47,7 +49,18 @@ class MyAdapetr(val context: Context, val commit:Commit,val activity:Activity):R
             bundle.putString("SHA",sha)
             bundle.putString("MESSAGE",message)
             bundle.putString("TOTAL_COMMITS",commit.size.toString())
+            bundle.putString("AUTHOR_USERNAME",singleCommit.author.login)
 
+            var count = 0
+            commit.forEach {
+                if(author.equals(it.commit.author.name))
+                {
+                    count++
+                }
+            }
+            Log.d("e38rg23",count.toString())
+
+            bundle.putString("MESSAGE",message)
             navController.navigate(R.id.action_screen1_to_screen2,bundle)
         }
 
