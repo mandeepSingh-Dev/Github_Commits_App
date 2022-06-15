@@ -13,9 +13,10 @@ import androidx.navigation.NavOptions
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.mandeep.github_commits_app.MVVM.DataObjects.Commit
+import com.mandeep.github_commits_app.MVVM.DataObjects.CommitItem
 import com.mandeep.github_commits_app.R
 
-class MyAdapetr(val context: Context, val commit:Commit,val activity:Activity):RecyclerView.Adapter<MyAdapetr.MyViewHolder>() {
+class MyAdapetr(val context: Context, val commitItem: List<CommitItem>, val activity:Activity):RecyclerView.Adapter<MyAdapetr.MyViewHolder>() {
 
     lateinit var navController:NavController
 
@@ -28,7 +29,8 @@ class MyAdapetr(val context: Context, val commit:Commit,val activity:Activity):R
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
 
-        val singleCommit = commit.get(position)
+       // val singleCommit = commit.get(position)
+        val singleCommit = commitItem.get(position)
 
 
         val author = singleCommit.commit.author.name
@@ -48,11 +50,11 @@ class MyAdapetr(val context: Context, val commit:Commit,val activity:Activity):R
             bundle.putString("DATE",date)
             bundle.putString("SHA",sha)
             bundle.putString("MESSAGE",message)
-            bundle.putString("TOTAL_COMMITS",commit.size.toString())
+            bundle.putString("TOTAL_COMMITS",commitItem.size.toString())
             bundle.putString("AUTHOR_USERNAME",singleCommit.author.login)
 
             var count = 0
-            commit.forEach {
+            commitItem.forEach {
                 if(author.equals(it.commit.author.name))
                 {
                     count++
@@ -68,7 +70,7 @@ class MyAdapetr(val context: Context, val commit:Commit,val activity:Activity):R
 
     override fun getItemCount(): Int {
 
-        return commit.size
+        return commitItem.size
     }
 
     inner class MyViewHolder(itemView: View):RecyclerView.ViewHolder(itemView)
